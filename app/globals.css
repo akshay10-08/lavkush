@@ -1,26 +1,299 @@
 @import "tailwindcss";
 
+/* =============================================================================
+   LUV KUSH VATIKA — Design System Tokens
+   Regal garden luxury: emerald + champagne gold + ivory
+   ============================================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Color Palette ─────────────────────────────────────────── */
+  --ivory: #F7F2E9;
+  --cream: #FBF8F1;
+  --emerald: #14342B;
+  --emerald-700: #1C4A3A;
+  --emerald-600: #245C4B;
+  --sage: #9DAE9B;
+  --sage-light: #C4D1C3;
+  --gold: #C29A4E;
+  --gold-soft: #E4CE9E;
+  --gold-hover: #D4AA5E;
+  --charcoal: #1B1B17;
+  --muted: #6B6A60;
+  --muted-light: #9E9D93;
+
+  /* ── Semantic Mappings ─────────────────────────────────────── */
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+
+  /* ── Font Families ─────────────────────────────────────────── */
+  /* TODO: replace --font-wordmark with the exact brand typeface from logo */
+  --font-wordmark: var(--font-display);
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-inter);
 }
 
+/* ── Tailwind v4 Theme ───────────────────────────────────────── */
 @theme inline {
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-emerald: var(--emerald);
+  --color-emerald-700: var(--emerald-700);
+  --color-emerald-600: var(--emerald-600);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-hover: var(--gold-hover);
+  --color-charcoal: var(--charcoal);
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+  --font-display: var(--font-cormorant);
+  --font-wordmark: var(--font-cormorant);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base Styles ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body), system-ui, sans-serif;
+  line-height: 1.7;
 }
+
+/* ── Typography ──────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ── Selection ───────────────────────────────────────────────── */
+::selection {
+  background: var(--gold-soft);
+  color: var(--emerald);
+}
+
+/* ── Focus ───────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar (subtle) ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sage);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ── Gold Ornament Divider ───────────────────────────────────── */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  max-width: 120px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-soft),
+    transparent
+  );
+}
+.ornament-divider svg {
+  color: var(--gold);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Eyebrow Text ────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ── Gold Underline Wipe (links) ─────────────────────────────── */
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gold-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Ken Burns (hero) ────────────────────────────────────────── */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.ken-burns {
+  animation: kenBurns 12s ease-out forwards;
+}
+
+/* ── Marquee ─────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-track-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* ── Section spacing ─────────────────────────────────────────── */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* ── Content max-width ───────────────────────────────────────── */
+.content-container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (min-width: 768px) {
+  .content-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ── Dark section (emerald bg) ───────────────────────────────── */
+.section-dark {
+  background-color: var(--emerald);
+  color: var(--ivory);
+}
+.section-dark .eyebrow {
+  color: var(--gold-soft);
+}
+
+/* ── Reduced Motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ken-burns {
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Mobile input zoom fix ───────────────────────────────────── */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ── Utility: hide scrollbar ─────────────────────────────────── */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Sticky mobile bar padding ───────────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* ── WhatsApp pulse ──────────────────────────────────────────── */
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+}
+
+/* ── Hero blur effect ────────────────────────────────────────── */
+.hero-bg {
+  filter: blur(2px);
+  transform: scale(1.05); /* prevents blur edge cropping */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 90, 255, 0.05);
+  backdrop-filter: blur(2px);
+}
+
