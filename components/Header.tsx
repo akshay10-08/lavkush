@@ -43,14 +43,14 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
+        className={`fixed inset-x-4 top-4 md:top-6 mx-auto max-w-[1240px] z-50 rounded-full border border-white/20 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-inset ring-white/15 glass-capsule-fallback transition-colors duration-500 px-6 ${
           scrolled
-            ? "bg-ivory shadow-[0_1px_8px_rgba(0,0,0,0.06)]"
-            : "bg-transparent"
+            ? "bg-[#F7F2E9]/85 shadow-[0_12px_40px_rgba(20,52,43,0.25)]"
+            : "bg-white/15 shadow-[0_8px_32px_rgba(20,52,43,0.18)]"
         }`}
         animate={{
-          paddingTop: scrolled ? 12 : 20,
-          paddingBottom: scrolled ? 12 : 20,
+          paddingTop: scrolled ? 8 : 12,
+          paddingBottom: scrolled ? 8 : 12,
         }}
         transition={
           reducedMotion
@@ -59,11 +59,11 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
         }
       >
         <nav
-          className="content-container flex items-center justify-between"
+          className="flex items-center justify-between"
           aria-label="Primary navigation"
         >
           {/* Wordmark / Logo */}
-          <Link href="/" aria-label="Luv Kush Vatika — Home" className="relative h-32 w-48 md:h-48 md:w-72 transition-opacity duration-300">
+          <Link href="/" aria-label="Luv Kush Vatika — Home" className="relative h-20 w-48 md:h-32 md:w-72 -my-5 md:-my-10 z-10 transition-opacity duration-300 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold">
             <Image
               src="/images/logoo.png"
               alt="Luv Kush Vatika Logo"
@@ -74,13 +74,13 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <ul className="hidden lg:flex items-center gap-8">
+          <ul className="hidden lg:flex items-center gap-7">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`gold-underline text-sm font-sans font-medium tracking-wide transition-colors duration-500 ${
-                    scrolled ? "text-charcoal" : "text-ivory"
+                  className={`gold-underline text-xs font-sans font-medium uppercase tracking-[0.12em] transition-colors duration-500 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                    scrolled ? "text-[#1A1D1A] hover:text-[#C29A4E]" : "text-ivory hover:text-[#C29A4E]"
                   }`}
                 >
                   {link.label}
@@ -93,31 +93,25 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
           <div className="flex items-center gap-4">
             {/* Desktop CTA */}
             <div className="hidden lg:block">
-              <Button
-                variant="ghost"
-                size="sm"
+              <button
                 onClick={onOpenEnquiry}
-                className={`transition-colors duration-500 ${
-                  scrolled
-                    ? "!border-gold !text-gold hover:!bg-gold hover:!text-ivory"
-                    : "!border-gold-soft !text-gold-soft hover:!bg-gold-soft hover:!text-emerald"
-                }`}
-                aria-label="Plan your event — open enquiry form"
+                className="bg-[#C29A4E] text-[#14342b] rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(194,154,78,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                aria-label="Enquire Now — open enquiry form"
               >
-                Plan Your Event
-              </Button>
+                Enquire Now
+              </button>
             </div>
 
             {/* Mobile hamburger button */}
             <button
-              className="lg:hidden relative flex flex-col items-center justify-center w-10 h-10 focus:outline-none"
+              className="lg:hidden relative flex flex-col items-center justify-center w-10 h-10 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
             >
               <motion.span
                 className={`block h-[2px] w-6 rounded-full transition-colors duration-500 ${
-                  scrolled || mobileMenuOpen ? "bg-gold" : "bg-gold-soft"
+                  scrolled || mobileMenuOpen ? "bg-[#1A1D1A]" : "bg-ivory"
                 }`}
                 animate={
                   mobileMenuOpen
@@ -132,7 +126,7 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
               />
               <motion.span
                 className={`block h-[2px] w-6 rounded-full transition-colors duration-500 ${
-                  scrolled || mobileMenuOpen ? "bg-gold" : "bg-gold-soft"
+                  scrolled || mobileMenuOpen ? "bg-[#1A1D1A]" : "bg-ivory"
                 }`}
                 animate={
                   mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }
@@ -145,7 +139,7 @@ export function Header({ onOpenEnquiry }: HeaderProps) {
               />
               <motion.span
                 className={`block h-[2px] w-6 rounded-full transition-colors duration-500 ${
-                  scrolled || mobileMenuOpen ? "bg-gold" : "bg-gold-soft"
+                  scrolled || mobileMenuOpen ? "bg-[#1A1D1A]" : "bg-ivory"
                 }`}
                 animate={
                   mobileMenuOpen

@@ -284,16 +284,42 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ── Hero blur effect ────────────────────────────────────────── */
+/* ── Hero blur + Ken Burns effect ────────────────────────────── */
 .hero-bg {
   filter: blur(2px);
-  transform: scale(1.05); /* prevents blur edge cropping */
+  transform: scale(1.05);
+  animation: kenBurns 14s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg {
+    animation: none;
+    transform: scale(1.05);
+  }
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(40, 90, 255, 0.05);
-  backdrop-filter: blur(2px);
+  background: rgba(20, 52, 43, 0.05);
+  backdrop-filter: blur(1px);
 }
 
+/* ── Glass Capsule Fallback ──────────────────────────────────── */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-capsule-fallback {
+    background-color: rgba(247, 242, 233, 0.95) !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-capsule-fallback {
+    background-color: rgba(247, 242, 233, 0.95) !important;
+    backdrop-filter: none !important;
+  }
+}
